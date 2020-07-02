@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jul  2 15:53:16 2020
+
+@author: Vivek
+"""
+
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout 
 from kivy.uix.button import Button 
@@ -9,6 +16,7 @@ from kivyoav.delayed import delayable
 from collections import deque
 from random import random
 from Heap import heap_node,min_heap
+from Heuristics import diagonal_distance
 
 
 #Window.fullscreen = "auto"
@@ -16,13 +24,14 @@ Window.size=[400,400]
 class MyWidget(GridLayout):
     
     def on_touch_move(self,touch):
-        for i in self.buck:
-            
-            if i.collide_point(touch.pos[0],touch.pos[1]):
+        if self.ids["Start"].disabled!=True:
+            for i in self.buck:
                 
-                i.background_color=[0,0,0,1]
-                i.disabled=True
-                break
+                if i.collide_point(touch.pos[0],touch.pos[1]):
+                    
+                    i.background_color=[0,0,0,1]
+                    i.disabled=True
+                    break
 
     def get_button_number(self,x,y):
         
@@ -31,9 +40,9 @@ class MyWidget(GridLayout):
     
     
     def touch_down(self,butt):
-        
-        butt.background_color=[0,0,0,1]
-        butt.disabled=True       
+        if self.ids["Start"].disabled!=True:
+            butt.background_color=[0,0,0,1]
+            butt.disabled=True       
         
             
             
@@ -447,6 +456,14 @@ class MyWidget(GridLayout):
                     
                     temp=stack.pop()
                     path.append(temp)
+                    
+                    
+    def Best_First(self,source,dest,Flag,traversed,path):
+        
+        pass
+        
+        
+        
     @delayable 
     def start(self):
         

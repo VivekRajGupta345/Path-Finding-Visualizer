@@ -10,8 +10,8 @@ def diagonal_distance(curr,dest,col):
     current_x=curr%col
     current_y=curr//col
     
-    destination_x=curr%col
-    destination_y=curr//col
+    destination_x=dest%col
+    destination_y=dest//col
     
     h=max(abs(current_x-destination_x),abs(current_y-destination_y))
     
@@ -23,8 +23,8 @@ def manhattan_distance(curr,dest,col):
     current_x=curr%col
     current_y=curr//col
     
-    destination_x=curr%col
-    destination_y=curr//col
+    destination_x=dest%col
+    destination_y=dest//col
     
     h=abs(current_x-destination_x)+abs(current_y-destination_y)
     
@@ -35,8 +35,8 @@ def eucledian_distance(curr,dest,col):
     current_x=curr%col
     current_y=curr//col
     
-    destination_x=curr%col
-    destination_y=curr//col
+    destination_x=dest%col
+    destination_y=dest//col
     
     h=((current_x-destination_x)**2 + (current_y-destination_y)**2)**0.5
     

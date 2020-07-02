@@ -16,7 +16,7 @@ from kivyoav.delayed import delayable
 from collections import deque
 from random import random
 from Heap import heap_node,min_heap
-from Heuristics import diagonal_distance
+from Heuristics import eucledian_distance
 
 
 #Window.fullscreen = "auto"
@@ -433,21 +433,18 @@ class MyWidget(GridLayout):
                     
                     for i in moves:
                         
-                        if self.is_valid(i):
-                            
-                            if heap.contains(i):
+                        if self.is_valid(i) and heap.contains(i):
+                        
+                            if node.val+1<heap.get_val(i):
                                 
-                                if node.val+1<heap.get_val(i):
-                                    
-                                    heap.decrease_key(i,node.val+1,node.key)
+                                heap.decrease_key(i,node.val+1,node.key)
                
             if short_path.get(dest)!=None:
                 Flag[0]=True
-                
                 temp=short_path.get(dest)
-                
                 stack=[]
                 stack.append(dest)
+                
                 while(temp):
                     stack.append(temp)
                     temp=short_path.get(temp)
@@ -460,10 +457,132 @@ class MyWidget(GridLayout):
                     
     def Best_First(self,source,dest,Flag,traversed,path):
         
-        pass
+        if self.is_valid(source):
+            
+            shortest_path={} #stores button number as key and its parent as value
+            
+            heap=min_heap()
+            
+            for i in range(0,self.row*self.col):
+                
+                if self.is_valid(i):
+                    heap.push(i,float("inf"),None)
+            
+            source_cost=eucledian_distance(source,dest,self.col)
+            
+            heap.decrease_key(source,source_cost,None)
+            
+            while(not heap.isempty()):
+                
+                node=heap.extract_min()
+                
+                if node.val<float("inf"):
+                    
+                    traversed.append(node.key)
+                    shortest_path[node.key]=node.parent
+                    
+                    if node.key==dest:
+                        Flag[0]=True
+                        break
+
+                    moves=self.movement(node.key)
+                    
+                    for i in moves:
+                        
+                        if self.is_valid(i) and heap.contains(i) :
+                           
+                            cost=eucledian_distance(i,dest,self.col)
+                            
+                            if cost<heap.get_val(i):
+                                
+                                heap.decrease_key(i,cost,node.key)
+
+            if Flag[0]==True:
+                
+                stack=[]
+                
+                stack.append(dest)
+                
+                temp=shortest_path.get(dest)
+                
+                while(temp):
+                    
+                    stack.append(temp)
+                    
+                    temp=shortest_path.get(temp)
+                
+                while(stack):
+                    
+                    temp=stack.pop()
+                    path.append(temp)
+                    
         
+    def A_star(self,source,dest,Flag,traversed,path):
         
-        
+        if self.is_valid(source):
+            
+            shortest_path={} #stores button number as key and its parent as value
+            g={} #distance travelled from source to key
+            heap=min_heap()
+            
+            for i in range(0,self.row*self.col):
+                
+                if self.is_valid(i):
+                    heap.push(i,float("inf"),None)
+            
+            source_cost=eucledian_distance(source,dest,self.col) + 0
+            
+            heap.decrease_key(source,source_cost,None)
+            g[source]=0
+            
+            while(not heap.isempty()):
+                
+                node=heap.extract_min()
+                
+                if node.val<float("inf"):
+                    
+                    traversed.append(node.key)
+                    shortest_path[node.key]=node.parent
+                    
+                    if node.key==dest:
+                        Flag[0]=True
+                        break
+
+                    moves=self.movement(node.key)
+                    
+                    for i in moves:
+                        
+                        if self.is_valid(i) and heap.contains(i) :
+                           
+                            cost=eucledian_distance(i,dest,self.col)+ g[node.key]
+                            
+                            g[i]=g[node.key]+1
+                            
+                            if cost<heap.get_val(i):
+                                
+                                heap.decrease_key(i,cost,node.key)
+
+            if Flag[0]==True:
+                
+                stack=[]
+                
+                stack.append(dest)
+                
+                temp=shortest_path.get(dest)
+                
+                while(temp):
+                    
+                    stack.append(temp)
+                    
+                    temp=shortest_path.get(temp)
+                
+                while(stack):
+                    
+                    temp=stack.pop()
+                    path.append(temp)
+                    
+    
+    
     @delayable 
     def start(self):
         
@@ -510,7 +629,14 @@ class MyWidget(GridLayout):
             elif self.ids["AlgoButton"].text=="Dijkstra's":
                 
                 self.Dijkstras(source,Flag,dest,traversed,path)
-               
+                
+            elif self.ids["AlgoButton"].text=="Best First Search":
+                
+                self.Best_First(source,dest,Flag,traversed,path)
+                
+            elif self.ids["AlgoButton"].text=="A*":
+                
+                self.A_star(source,dest,Flag,traversed,path)
             
             for i in traversed:
                 yield 0.1
@@ -556,7 +682,6 @@ class WidgetsApp(App):
         root=MyWidget()
         
         root.create_grid()
-    
         
         return root
     

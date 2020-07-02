@@ -49,11 +49,13 @@ class min_heap:
     
     
     
-    def push(self,keys,value):
+    def push(self,keys,value,parents):
         
         elem=heap_node()
         elem.val=value
         elem.key=keys
+        elem.parent=parents
+        
         self.heap.append(elem)
         self.mapp[elem.key]=len(self.heap)-1
         self.heapify_up(len(self.heap)-1)
@@ -109,7 +111,7 @@ class min_heap:
             self.mapp[temp.key]=None
             
             self.heapify_down()
-            return temp.key
+            return temp
         else:
             print("Error")
     
@@ -127,8 +129,9 @@ class min_heap:
         else:
             return True
     
-    def decrease_key(self,key,new_val):
+    def decrease_key(self,key,new_val,new_parent):
         pos=self.mapp[key]
         self.heap[pos].val=new_val
+        self.heap[pos].parent=new_parent
         self.heapify_up(pos)
 

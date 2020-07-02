@@ -8,7 +8,7 @@ from functools import wraps
 from kivyoav.delayed import delayable
 from collections import deque
 from random import random
-
+from Heap import heap_node,min_heap
 
 
 #Window.fullscreen = "auto"
@@ -96,7 +96,6 @@ class MyWidget(GridLayout):
         
         ###########SRC-X#####################
         if self.ids["srcxinp"].focus!=True:
-            
             if msg1!="NA":
                 if int(msg1)<0 or int(msg1)>self.col-1 :
                   warning_row=Button(text="Please Select X cordinates between 0 and "+str(self.col-1),disabled=True)
@@ -106,7 +105,7 @@ class MyWidget(GridLayout):
                   self.ids["srcxinp"].text=""
                   popup.open()
                 else:
-                    
+                
                     self.ids["SourceX"].text="Src-x: "+msg1
                     self.ids["dropdown_srcX"].dismiss()
             
@@ -260,7 +259,7 @@ class MyWidget(GridLayout):
         return arr
     
     def is_valid(self,curr):
-        if curr<0 or curr>(self.row*self.col)-1 or self.buck[curr].background_color==[0,0,0,1]:
+        if curr<0 or curr>(self.row*self.col)-1 or self.buck[curr].disabled==True:
             return False
         else:
             return True
@@ -399,10 +398,56 @@ class MyWidget(GridLayout):
                 
                 self.IDS_dfs(arr,max_depth,temp,dest,visited,queue,path_list,Flag,path,traversed)
             
-       
-                
+    
+    def Dijkstras(self,source,Flag,dest,traversed,path):
         
-    @delayable       
+        if self.is_valid(source):
+            
+            short_path={} #stores button number as key and its parent as value
+            heap=min_heap()
+            
+            for i in range(0,self.row*self.col):
+                if self.is_valid(i):
+                    heap.push(i,float("infinity"),None)
+            
+            heap.decrease_key(source,0,None)
+            
+            while(not heap.isempty()):
+                
+                node=heap.extract_min()
+                if node.val<float("inf"):
+                    traversed.append(node.key)
+                    
+                    short_path[node.key]=node.parent
+                    
+                    moves=self.movement(node.key)
+                    
+                    for i in moves:
+                        
+                        if self.is_valid(i):
+                            
+                            if heap.contains(i):
+                                
+                                if node.val+1<heap.get_val(i):
+                                    
+                                    heap.decrease_key(i,node.val+1,node.key)
+               
+            if short_path.get(dest)!=None:
+                Flag[0]=True
+                
+                temp=short_path.get(dest)
+                
+                stack=[]
+                stack.append(dest)
+                while(temp):
+                    stack.append(temp)
+                    temp=short_path.get(temp)
+                
+                while(stack):
+                    
+                    temp=stack.pop()
+                    path.append(temp)
+    @delayable 
     def start(self):
         
         if self.source=="NA" or self.dest=="NA":
@@ -445,13 +490,9 @@ class MyWidget(GridLayout):
                 max_depth=4
                 self.IDS_bfs(source,dest,Flag,max_depth,path,traversed)
                 
-            elif self.ids["AlgoButton"].text=="All-Paths-DFS":
-                all_paths_flag=True
-                global all_paths
-                all_paths=[]       
-                visited={}
-                self.all_paths_dfs(source,dest,Flag,visited,[],all_paths)
-            
+            elif self.ids["AlgoButton"].text=="Dijkstra's":
+                
+                self.Dijkstras(source,Flag,dest,traversed,path)
                
             
             for i in traversed:
@@ -464,8 +505,12 @@ class MyWidget(GridLayout):
             if Flag[0]==True:
             
                 for i in path:                  
-                   yield 0.2
+                   
                    self.buck[i].background_color=[0.21903453537169115,0.6715567266291189,0.4497686499711627,1]
+                   temp=self.buck[i].text
+                   self.buck[i].text="*"
+                   yield 0.3
+                   self.buck[i].text=temp
             else:
                 
                 butt=Button(text="Destination cannot be reached.",disabled=True)

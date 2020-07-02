@@ -132,36 +132,3 @@ class min_heap:
         self.heap[pos].val=new_val
         self.heapify_up(pos)
 
-open=min_heap()
-
-arr=[7,9,2,6,0,1000,3,4]
-a="A"
-for i in arr:
-    
-    open.push(a,i)
-    a=chr(ord(a)+1)
-    
-    
-open.push("zxc",-8)
-
-
-open.push("qwer",2)
-a="A"
-open.decrease_key("qwer",-4)
-temp2=open.get_val("F")
-#print(open.get_val("qwer"))
-#print(temp2)
-count=0
-while(not open.isempty()):
-    if count==5:
-        break
-    count+=1
-    temp=open.extract_min()
-    print(temp)
-    
-
-open.decrease_key("F",-1000)
-print(open.contains("A"))
-temp=open.extract_min()
-print(temp)
-

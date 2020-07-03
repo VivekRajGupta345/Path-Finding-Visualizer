@@ -2,7 +2,6 @@
 	rows:2
 	spacing:10
 	padding:10
-	height: self.minimum_height
 	id: grid1
 	GridLayout:
 		rows:1
@@ -15,7 +14,7 @@
 			background_color: 0.1, 0.5, 0.6, 1
 		    text: 'Algo'
 			size_hint_y: 0.05
-			color: .8,.9,0,1
+			color: .8,.9,0,1 
 			on_parent: dropdown.dismiss()
         	on_release: dropdown.open(self)
 
@@ -30,6 +29,7 @@
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
+				halign:"center"
 				on_release: dropdown.select('BFS')
 			Button:
 
@@ -38,6 +38,7 @@
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
+				halign:"center"
 				on_release: dropdown.select('DFS')
 
 			Button:
@@ -47,6 +48,7 @@
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
+				halign:"center"
 				on_release: dropdown.select('A*')
 
 			Button:
@@ -56,16 +58,18 @@
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
+				halign:"center"
 				on_release: dropdown.select("Dijkstra's")
 
 			Button:
 
 	        	background_color: 0.1, 0.5, 0.6, 1
-			    text: 'Best First Search'
+			    text: 'Greedy-Best First'
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
-				on_release: dropdown.select('Best First Search')
+				halign:"center"
+				on_release: dropdown.select('Greedy-Best First')
 
 			Button:
 
@@ -74,6 +78,7 @@
 				size_hint_y:None
 				height:30
 				color: .8,.9,0,1
+				halign:"center"
 				on_release: dropdown.select('IDS')
 
 		
@@ -116,8 +121,7 @@
         DropDown:
         	id:dropdown_srcY
         	on_select: SourceY.text = '{}'.format(args[1])
-        	
-
+        
         	TextInput:
 	            id:srcyinp
 	            multiline:False
@@ -202,10 +206,10 @@
 		Button:
 			
 			id:Reset
-			background_color: 1, 0, 0, 1
+			background_color: 0.7, 0, 0, 1
 			text: 'Reset'
 			size_hint_y: 0.05
-			color: .8,.9,0,1
+			color: .6,.9,0,1
 			on_press:root.reset()
 
 
@@ -216,7 +220,16 @@
 		    text: 'About'
 			size_hint_y: 0.05
 			color: .8,.9,0,1
-
+			on_press:root.about()
+		Button:
+			
+			id:Close
+			background_color: 1, 0, 0, 1
+		    text: 'Exit'
+			size_hint_y: 0.05
+			size_hint_x:0.7
+			color: .8,.9,0,1
+			on_press:root.close()
 	
 	GridLayout:
 		id:grid2
@@ -225,7 +238,75 @@
 
 		
 
+<About_Popup>:
+	id:About_popup
+	title:"Project: Path Finding Visualizer"
+	size_hint:0.5,0.5
+	BoxLayout:
 
-	
+		orientation:"horizontal"
+		spacing:20
 		
-		
+		Image:
+			source:"my_image.jpg"
+			size_hint:0.5,0.8
+			pos_hint: {'center_x': 0.15, 'center_y': 0.5}
+			allow_stretch:True
+			keep_ratio:False
+
+		BoxLayout:
+
+			orientation:"vertical"
+
+			Label:
+				text:""
+				size_hint_y:0.3
+
+			Label:
+
+				text:"My name is Vivek Raj Gupta"
+				text_size:self.size
+				halign:"left"
+				size_hint_y:0.2
+				color: .8,.9,0,1
+				
+
+			Label:
+
+				text:"I am a final year ECE undergrad from BIT Mesra"
+				text_size:self.size
+				halign:"left"
+				size_hint_y:0.2
+				color: .8,.9,0,1
+				
+
+			Label:
+
+				text:"Mail: vivekraj345@gmail.com"
+				text_size:self.size
+				halign:"left"
+				size_hint_y:0.2
+				color: .8,.9,0,1
+				
+
+			Label:
+
+				text:"LinkedIn: https://www.linkedin.com/in/vivek-raj-gupta/"
+				text_size:self.size
+				halign:"left"
+				size_hint_y:0.2
+				color: .8,.9,0,1
+
+			Label:
+
+				text:"Github: https://github.com/VivekRajGupta345"
+				text_size:self.size
+				halign:"left"
+				size_hint_y:0.2
+				color: .8,.9,0,1
+
+			Label:
+				text:""
+
+			
+

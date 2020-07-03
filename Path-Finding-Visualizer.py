@@ -6,21 +6,22 @@ Created on Thu Jul  2 15:53:16 2020
 """
 
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout 
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button 
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
-from kivy.clock import Clock
-from functools import wraps
 from kivyoav.delayed import delayable
 from collections import deque
-from random import random
-from Heap import heap_node,min_heap
+from Heap import min_heap
 from Heuristics import eucledian_distance
 
 
-#Window.fullscreen = "auto"
-Window.size=[400,400]
+Window.fullscreen = "auto"
+#Window.size=[400,400]
+
+class About_Popup(Popup):
+    pass
+
 class MyWidget(GridLayout):
     
     def on_touch_move(self,touch):
@@ -47,7 +48,6 @@ class MyWidget(GridLayout):
             
             
     def create_grid(self):
-        nam=0
         
         self.buck=[]
         self.source="NA"
@@ -67,10 +67,8 @@ class MyWidget(GridLayout):
         
         for i in range (0,row*col):
             
-            butt=Button(text=str(nam))
+            butt=Button()
             butt.bind(on_press = self.touch_down)
-            
-            nam+=1
             self.ids["grid2"].add_widget(butt)
             self.buck.append(butt)
         
@@ -203,14 +201,11 @@ class MyWidget(GridLayout):
                            
     def reset(self):
         
-        count=0
         for i in self.buck:
             
-            i.text=str(count)
             i.bold=False
             i.background_color=[1,1,1,1]
             i.disabled=False
-            count+=1
         
         self.ids["srcxinp"].text=""
         self.ids["srcyinp"].text=""
@@ -226,6 +221,16 @@ class MyWidget(GridLayout):
         self.ids["DestY"].text="Dest-y: NA"
         
         self.Input()
+    
+    def about(self):
+        
+        popup=About_Popup()
+        
+        #popup=Popup(title="About",content=content,size_hint=[0.5,0.5])
+        popup.open()
+    
+    def close(self):
+        Window.close()
         
     def clean(self):
         
@@ -596,15 +601,13 @@ class MyWidget(GridLayout):
             content=Button(text="Please select the Algorithm to be used",disabled=True)
             popup = Popup(title="",content=content,size_hint=[0.3,0.3])
             popup.open()
-            
-        
+            s
         else:
-            self.clean()
+            self.clean()                    
             path=[]
             Flag=[False]
             source=self.source
             dest=self.dest
-            global traversed
             traversed=[]
             
             self.ids["AlgoButton"].disabled=True
@@ -614,6 +617,7 @@ class MyWidget(GridLayout):
             self.ids["SourceY"].disabled=True
             self.ids["DestX"].disabled=True
             self.ids["DestY"].disabled=True
+            self.ids["About"].disabled=True
             
             if self.ids["AlgoButton"].text=="BFS":
                 self.BFS(source,dest,Flag,path,traversed)
@@ -630,7 +634,7 @@ class MyWidget(GridLayout):
                 
                 self.Dijkstras(source,Flag,dest,traversed,path)
                 
-            elif self.ids["AlgoButton"].text=="Best First Search":
+            elif self.ids["AlgoButton"].text=="Greedy-Best First":
                 
                 self.Best_First(source,dest,Flag,traversed,path)
                 
@@ -669,6 +673,7 @@ class MyWidget(GridLayout):
             self.ids["SourceY"].disabled=False
             self.ids["DestX"].disabled=False
             self.ids["DestY"].disabled=False
+            self.ids["About"].disabled=False
 
                          
         

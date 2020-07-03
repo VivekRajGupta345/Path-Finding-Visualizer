@@ -169,7 +169,7 @@ class MyWidget(GridLayout):
             
             if self.source!="NA":
                 
-                self.buck[self.source].text=str(self.source)
+                self.buck[self.source].text=""
                 self.buck[self.source].bold=False
                 self.buck[self.source].background_color=[1,1,1,1]
                 
@@ -189,7 +189,7 @@ class MyWidget(GridLayout):
             
             if self.dest!="NA":
                 
-                self.buck[self.dest].text=str(self.dest)
+                self.buck[self.dest].text=""
                 self.buck[self.dest].bold=False
                 self.buck[self.dest].background_color=[1,1,1,1]
             
@@ -206,6 +206,7 @@ class MyWidget(GridLayout):
             i.bold=False
             i.background_color=[1,1,1,1]
             i.disabled=False
+            i.text=""
         
         self.ids["srcxinp"].text=""
         self.ids["srcyinp"].text=""
@@ -601,7 +602,7 @@ class MyWidget(GridLayout):
             content=Button(text="Please select the Algorithm to be used",disabled=True)
             popup = Popup(title="",content=content,size_hint=[0.3,0.3])
             popup.open()
-            s
+            
         else:
             self.clean()                    
             path=[]

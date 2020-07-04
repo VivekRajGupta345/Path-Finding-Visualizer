@@ -18,7 +18,7 @@ Refrain from deleting or moving any files.
    
    2) BFS (Gives Shprtest Path).
    
-   3) Iterative Deepeing Search
+   3) Iterative Deepening Search
    
    4) Dijkstra's algorithm (Gives Shortest path).
    

@@ -14,17 +14,17 @@ Implemented BFS, DFS, Iterative Deepening Search,Dijkstra’s Algorithm, Greedy-
 Refrain from deleting or moving any files.
 * Six Algorithms can be chosen:
 
-   1 DFS.
+   1) DFS.
    
-   2 BFS (Gives Shprtest Path).
+   2) BFS (Gives Shprtest Path).
    
-   3 Iterative Deepeing Search
+   3) Iterative Deepeing Search
    
-   4 Dijkstra's algorithm (Gives Shortest path).
+   4) Dijkstra's algorithm (Gives Shortest path).
    
-   5 Greedy Best First Search.
+   5) Greedy Best First Search.
    
-   6 A* Algorithm (Gives Shortest Path).
+   6) A* Algorithm (Gives Shortest Path).
    
 * Movement from one cell to another is in eight directions:
 

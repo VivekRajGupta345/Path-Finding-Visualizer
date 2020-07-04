@@ -28,12 +28,12 @@ Refrain from deleting or moving any files.
    
 * Movement from one cell to another is in eight directions:
 
-up,down,left,right, and 4 diagonals
+  up,down,left,right, and 4 diagonals
 
 * To create walls in the the path/grid you can left click or drag the mouse while clicking.
 * For the event of a popup:
 
-Clicking anywhere on the screen other the popup will dismiss it.
+  Clicking anywhere on the screen other the popup will dismiss it.
 * Pressing Escape will close the application
 * Heuristic Function used for Greedy-Best First Search and A* Algorithm is Eucledian Distance
 <h3 align="center">**Star :star:  this repo to show your support and it really does matter!** :clap:</h4>

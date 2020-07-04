@@ -36,4 +36,16 @@ Refrain from deleting or moving any files.
   Clicking anywhere on the screen other the popup will dismiss it.
 * Pressing Escape will close the application
 * Heuristic Function used for Greedy-Best First Search and A* Algorithm is Eucledian Distance
+
+
+<p align="left"><img src="/my_image.jpg" width=160></p>
+
+Created by- Vivek Raj Gupta
+
+Mail: vivekraj345@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/vivek-raj-gupta/
+
+Github: https://github.com/VivekRajGupta345
+
 <h3 align="center">**Star :star:  this repo to show your support and it really does matter!** :clap:</h4>

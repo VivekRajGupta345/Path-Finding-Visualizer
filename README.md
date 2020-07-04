@@ -13,6 +13,7 @@ Implemented BFS, DFS, Iterative Deepening Search,Dijkstra’s Algorithm, Greedy-
 * Click on Path_Finder.exe to start the application.
 Refrain from deleting or moving any files.
 * Six Algorithms can be chosen:
+
    1 DFS.
    
    2 BFS (Gives Shprtest Path).

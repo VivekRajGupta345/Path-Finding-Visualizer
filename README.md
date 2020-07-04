@@ -7,7 +7,7 @@ Implemented BFS, DFS, Iterative Deepening Search,Dijkstra’s Algorithm, Greedy-
 
 # Download
 
-<p align="center"><a href="https://github.com/VivekRajGupta345/Path-Finding-Visualizer/releases/tag/v1.0"><img src="https://github.com/mukul500/AnimeXStream/blob/dev/meta/android/download.png"></a></p> 
+<p align="center"><a href="https://drive.google.com/drive/folders/16dmCk5kYy-zJ4xGf-nLcSl73oV1msO8s?usp=sharing"><img src="https://github.com/mukul500/AnimeXStream/blob/dev/meta/android/download.png"></a></p> 
 
 ## Quick Start Guide
 * Click on Path_Finder.exe to start the application.

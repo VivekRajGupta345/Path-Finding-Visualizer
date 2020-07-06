@@ -561,12 +561,11 @@ class MyWidget(GridLayout):
                         if self.is_valid(i) and heap.contains(i) :
                            
                             cost=eucledian_distance(i,dest,self.col)+ g[node.key]
-                            
-                            g[i]=g[node.key]+1
-                            
+                                                        
                             if cost<heap.get_val(i):
                                 
                                 heap.decrease_key(i,cost,node.key)
+                                g[i]=g[node.key]+1
 
             if Flag[0]==True:
                 

@@ -40,7 +40,7 @@ Refrain from deleting or moving any files.
 
 <p align="left"><img src="/my_image.jpg" width=160></p>
 
-Created by- Vivek Raj Gupta
+Built by- Vivek Raj Gupta
 
 Mail: vivekraj345@gmail.com
 

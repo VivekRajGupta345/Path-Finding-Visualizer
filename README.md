@@ -16,7 +16,7 @@ Refrain from deleting or moving any files.
 
    1) DFS.
    
-   2) BFS (Gives Shprtest Path).
+   2) BFS (Gives Shortest Path).
    
    3) Iterative Deepening Search
    

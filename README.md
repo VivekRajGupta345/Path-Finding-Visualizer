@@ -5,7 +5,7 @@ Built a Desktop Application for visualizing different Path Finding algorithms us
 
 Implemented BFS, DFS, Iterative Deepening Search,Dijkstra’s Algorithm, Greedy-Best First Search and A* Algorithm.
 
-# Download for Windows 64 bit systems
+# Download for (Windows 64 bit) systems
 
 <p align="center"><a href="https://drive.google.com/drive/folders/16dmCk5kYy-zJ4xGf-nLcSl73oV1msO8s?usp=sharing"><img src="https://github.com/mukul500/AnimeXStream/blob/dev/meta/android/download.png"></a></p> 
 

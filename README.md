@@ -16,7 +16,7 @@ Refrain from deleting or moving any files.
 
    1) DFS.
    
-   2) BFS (Gives Shprtest Path).
+   2) BFS (Gives Shortest Path).
    
    3) Iterative Deepening Search
    
@@ -40,7 +40,7 @@ Refrain from deleting or moving any files.
 
 <p align="left"><img src="/my_image.jpg" width=160></p>
 
-Created by- Vivek Raj Gupta
+Built by- Vivek Raj Gupta
 
 Mail: vivekraj345@gmail.com
 

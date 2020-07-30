@@ -10,11 +10,11 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button 
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
-from kivyoav.delayed import delayable
 from collections import deque
 from Heap import min_heap
 from Heuristics import eucledian_distance
-
+from kivy.clock import Clock
+from functools import partial
 
 Window.fullscreen = "auto"
 #Window.size=[400,400]
@@ -586,9 +586,7 @@ class MyWidget(GridLayout):
                     temp=stack.pop()
                     path.append(temp)
                     
-    
-    
-    @delayable 
+
     def start(self):
         
         if self.source=="NA" or self.dest=="NA":
@@ -642,40 +640,63 @@ class MyWidget(GridLayout):
                 
                 self.A_star(source,dest,Flag,traversed,path)
             
-            for i in traversed:
-                yield 0.1
-                
-                self.buck[i].background_color=[0.888026005753999,0.44633413667676225,0.17094569623391598,1]
-                
-                
+            def visualize_path(count,length,path,*largs):
+                    if count==length:
+                        prev_button=path[count-1]
+                        self.buck[prev_button].text="D"
+                        
+                        #Revert the changes/ Enable the menu
+                        self.ids["AlgoButton"].disabled=False
+                        self.ids["Start"].disabled=False
+                        self.ids["Reset"].disabled=False
+                        self.ids["SourceX"].disabled=False
+                        self.ids["SourceY"].disabled=False
+                        self.ids["DestX"].disabled=False
+                        self.ids["DestY"].disabled=False
+                        self.ids["About"].disabled=False 
+                        return
+                    else:
+                        button_num=path[count]
+                        if count!=0:
+                            prev_button=path[count-1]
+                            if count!=1:
+                                self.buck[prev_button].text=""
+                            self.buck[button_num].text="*"
+                  
+                        self.buck[button_num].background_color=[0.21903453537169115,0.6715567266291189,0.4497686499711627,1]
+                            #temp=self.buck[button_num].text
+                            
+                        
+                        Clock.schedule_once(partial(visualize_path,count+1,len(path),path),0.3)#To show the path's button
             
-            if Flag[0]==True:
-            
-                for i in path:                  
-                   
-                   self.buck[i].background_color=[0.21903453537169115,0.6715567266291189,0.4497686499711627,1]
-                   temp=self.buck[i].text
-                   self.buck[i].text="*"
-                   yield 0.3
-                   self.buck[i].text=temp
-            else:
-                
-                butt=Button(text="Destination cannot be reached.",disabled=True)
-                
-                popup=Popup(content=butt,size_hint=[0.3,0.3])      
-                popup.open()
-                 
-            
-            self.ids["AlgoButton"].disabled=False
-            self.ids["Start"].disabled=False
-            self.ids["Reset"].disabled=False
-            self.ids["SourceX"].disabled=False
-            self.ids["SourceY"].disabled=False
-            self.ids["DestX"].disabled=False
-            self.ids["DestY"].disabled=False
-            self.ids["About"].disabled=False
-
+            def visualize_traversed(count,length,traversed,path,flag,*largs):
+                if count==length:
+                    if flag[0]==True:
+                        Clock.schedule_once(partial(visualize_path,0,len(path),path),0.3)#TO visualize a path if it exists
                          
+                    else:
+                        butt=Button(text="Destination cannot be reached.",disabled=True)                
+                        popup=Popup(content=butt,size_hint=[0.3,0.3])      
+                        popup.open()
+                        
+                         #Revert the changes
+                        self.ids["AlgoButton"].disabled=False
+                        self.ids["Start"].disabled=False
+                        self.ids["Reset"].disabled=False
+                        self.ids["SourceX"].disabled=False
+                        self.ids["SourceY"].disabled=False
+                        self.ids["DestX"].disabled=False
+                        self.ids["DestY"].disabled=False
+                        self.ids["About"].disabled=False 
+                    return 
+                else:
+                    button_num=traversed[count]
+                    self.buck[button_num].background_color=[0.888026005753999,0.44633413667676225,0.17094569623391598,1]
+                    Clock.schedule_once(partial(visualize_traversed,count+1,length,traversed,path,Flag),0.1)
+                
+            #To show the traversed-path buttons
+            Clock.schedule_once(partial(visualize_traversed,0,len(traversed),traversed,path,Flag),0.1)#To show the traversed-path buttons
+                
         
     
 
